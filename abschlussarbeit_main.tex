@@ -1,0 +1,217 @@
+%%% COPYRIGHT © Christopher Nies, 2022-04-11 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%======================================================================
+%======== definition of the domumentclass =============================
+%======================================================================
+%
+\documentclass[%
+	% draft,		% uncomment to suspend figure content (time saving)
+	a4paper,
+	12pt,
+	parskip=half-,	% spacing before/after section
+	headsepline,	% line under headline
+	captions=tableheading,
+	DIV=15,
+	BCOR=5mm,
+	ngerman			% siunitx
+]{scrreprt}			% KOMA
+%
+%\RedeclareSectionCommand[%	
+  %beforeskip=0pt,%
+  %afterindent=false%	to suspend space over chapter-headings
+  %]{chapter}
+%
+%
+%========================================================================
+%========== usefull packages ============================================
+%========================================================================
+%
+%---------- german (englisch) settings ----------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+%
+%
+%
+%---------- layout ------------------------------------------------------ 
+\usepackage{lmodern}
+\usepackage{blindtext}
+\usepackage[automark]{scrlayer-scrpage}		% KOMA
+\usepackage{textcomp}						% copyright symbols
+\pagestyle{scrheadings}
+\ohead{\headmark}
+\chead{}
+\cfoot[\pagemark]{\pagemark}
+\usepackage[plainpages=false]{hyperref}
+\hypersetup{hidelinks}
+\setkomafont{captionlabel}{\sffamily\bfseries}
+\addto{\captionsngerman}{%
+	\renewcommand*{\figurename}{Abb.}
+	\renewcommand*{\tablename}{Tab.}
+}
+\renewcommand*{\arraystretch}{1.3}
+%
+% fontstyle for software mentions
+\newcommand{\software}[1]{{\ttfamily{#1}}}
+%
+% german abbreviations
+\usepackage{xspace}
+\newcommand{\zB}{\mbox{z.\,B.}\xspace}
+\renewcommand{\dh}{\mbox{d.\,h.}\xspace}
+\newcommand{\di}{\mbox{d.\,i.}\xspace}
+\newcommand{\oA}{\mbox{o.\,Ä.}\xspace}
+\newcommand{\uA}{\mbox{u.\,Ä.}\xspace}
+\newcommand{\ua}{\mbox{u.\,a.}\xspace}
+\newcommand{\usw}{\mbox{usw.}\xspace}
+\newcommand{\vgl}{\mbox{vgl.}\xspace}
+\newcommand{\idR}{\mbox{i.\,d.\,R.}\xspace}
+\newcommand{\bzw}{\mbox{bzw.}\xspace}
+\newcommand{\bspw}{\mbox{bspw.}\xspace}
+%
+%
+%
+%---------- American Mathematical Society (ams) -------------------------
+\usepackage{amsmath}	
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}	% for nice integrals: \diff{x} -> dx
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\euler}{\mathrm{e}}
+\newcommand{\imag}{\mathrm{i}}
+\usepackage[makeroom]{cancel} 
+\usepackage[locale=DE]{siunitx}
+\sisetup{%
+	output-decimal-marker = {.},%
+	exponent-product = \times,%
+}%
+%
+%
+%
+%---------- graphics/pictures --------------------------------------------
+\usepackage[]{graphicx}
+%
+\graphicspath{
+	{img/},%
+	{fig/},%
+	{img/pdf_tex}%
+	{img/pdf}%
+}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{gruen}{RGB}{0,176,80}
+\usepackage{tikz}
+\usepackage{pgfplots}
+% \pgfplotsset{compat=1.16}
+\pgfplotsset{compat=newest}
+% \usepackage{subfigure} %%% OLD!
+% \usepackage{caption}	% subfigures
+% using `subcaption' instead of the older `subfigure'
+\usepackage[skip=0.333\baselineskip]{subcaption}
+\captionsetup[subfigure]{format=hang}
+\usepackage{tocbasic}
+%
+\usepackage{pdfpages}
+\usepackage{import}
+% \usepackage{showframe} % visualize boundarys
+%
+%
+%% the following commands are needed for some matlab2tikz features
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{patchplots}
+\usepackage{grffile}
+	%% you may also want the following commands
+	%\pgfplotsset{plot coordinates/math parser=false}
+	%\newlength\figureheight
+	%\newlength\figurewidth
+%
+%
+%
+%---------- tables -------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\usepackage{multicol}	% mouch text
+\usepackage{multirow}	% mouch text
+\usepackage{booktabs}	% nicer lines
+%
+%
+%
+%----------- programming-code --------------------------------------------
+\usepackage{scrhack}
+\usepackage{listings}
+\usepackage[numbered,%
+    framed,%
+    ]{matlab-prettifier}
+%
+%
+%
+%---------- references ----------------------------------------------------
+\usepackage[autostyle, german=guillemets]{csquotes}
+\usepackage[%
+	backend=biber,%		
+	isbn=false,%
+	doi=false,%
+	url=false,%
+]{biblatex}
+\bibliography{03_literatur/studienarbeit.bib}
+%
+%
+%
+%---------- documents --------------------------------------------------------
+\includeonly{
+	01_titelei/01_deckblatt,% 
+	01_titelei/02_kurzfassung,%
+	01_titelei/03_abstract,%
+	01_titelei/05_aufgab,%
+	01_titelei/04_eid,%
+	02_kapitel/01_kapitel1,%
+	% 02_kapitel/02_kapitel2,%
+	% 02_kapitel/03_kapitel3,%
+	% 02_kapitel/04_kapitel4,%
+	% 02_kapitel/05_kapitel5,%
+	% 02_kapitel/06_kapitel6,%
+	% 02_kapitel/07_kapitel7,%
+	}
+%=============================================================================
+%========== BEGIN DOCUMENT ===================================================
+%=============================================================================
+%
+\begin{document}
+%
+\include{01_titelei/01_deckblatt}
+%
+\includepdf[pages = -]{img/Aufgabenstellung/Aufgabenstellung_Studienarbeit_Nies}
+%
+\pagenumbering{roman}
+%
+% \include{01_titelei/02_kurzfassung}\newpage
+% \include{01_titelei/03_abstract}\newpage
+%
+\tableofcontents\newpage
+%
+\listoffigures\newpage
+%
+\listoftables\newpage
+%
+\pagenumbering{arabic}
+%
+% \include{02_kapitel/00_inhaltEntwurf}
+\include{02_kapitel/01_kapitel1}
+% \include{02_kapitel/02_kapitel2}
+% \include{02_kapitel/03_kapitel3}
+% \include{02_kapitel/04_kapitel4}
+% \include{02_kapitel/05_kapitel5}
+% \include{02_kapitel/06_kapitel6}
+% \include{02_kapitel/07_kapitel7}
+%
+%
+\emergencystretch=.5em % to avoid overfullhbox in bib urls
+\printbibliography[title={Literaturverzeichnis}]
+%
+\include{01_titelei/04_eid}
+%
+\end{document}
